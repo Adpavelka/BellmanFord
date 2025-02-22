@@ -54,17 +54,6 @@ void testAll(const int source, const std::vector<Edge<T>>& edges)
                     << std::setw(12) << duration.count() 
                     << " seconds"
                     << std::endl;
-
-        /*if (!std::filesystem::exists("result")) {
-            std::filesystem::create_directory("result");
-        }
-        algo->printIntoFile("../result/" + algo->getName() + ".txt");*/
-
-        std::ofstream outFile("large_graph/" + algo->getName() + ".txt", std::ios::app);
-        if (outFile) {
-            outFile  << duration.count() << std::endl;
-        }
-        outFile.close();
     }
 }
 
@@ -85,54 +74,12 @@ int main()
     }*/
 
     {
-        std::cout << "Biiiiiig :D" << std::endl;
-        std::vector<Edge<int>> edges = loadEdgesFromFile<int>("C:\\Users\\42072\\Desktop\\codes\\graphs\\USA-road-d.NY.gr");
+        std::cout << "Big :D" << std::endl;
+        std::vector<Edge<int>> edges = loadEdgesFromFile<int>("..\\graphs\\USA-road-d.NY.gr");
 
         
         testAll(1, edges);
     }
-
-    /*{
-        std::cout << "Random :OOO" << std::endl;
-
-        std::random_device rd;
-        std::mt19937 gen(rd());
-        std::uniform_int_distribution<int> vertexDist(0, 5000);
-        std::uniform_int_distribution<int> weightDist(1, 1000);
-
-        std::vector<Edge<int>> edges;
-        for (int i {}; i < 100000; ++i) {
-            edges.emplace_back(vertexDist(gen), vertexDist(gen), weightDist(gen));
-        }
-
-        testAll(3333, edges);
-    }*/
-
-    /*{
-        std::cout << "Full Graph + Random Shuffle 8)" << std::endl;
-
-        for (int k {}; k < 20000; ++k) {
-            if (k % 100 == 0) {
-                std::cout << k << std::endl;
-            }
-
-            std::vector<Edge<int>> edges;
-            for (int i {}; i < 200; ++i) {
-                for (int j {i + 1}; j < 200; ++j) {
-                    edges.emplace_back(i, j, -1);
-                }
-            }
-
-            // shuffle
-            std::random_device rd;
-            std::mt19937 g(rd());
-            std::shuffle(edges.begin(), edges.end(), g);
-
-            testAll(0, edges);
-        }
-    }*/
-
-    
 
     return 0;
 }
