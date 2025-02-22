@@ -30,44 +30,44 @@ private:
     void initialize(const int)
     {
         m_reverseDirection = false;
-        this->m_order = &m_classicalOrder; // shared_ptr
-        this->m_vertices = &m_classicalVertices; // shared_ptr
+        this->m_order = &m_rank; // shared_ptr
+        this->m_vertices = &m_orderedVertices; // shared_ptr
     }
 
     void reversedOrderIteration()
     {
         m_reverseDirection = true;
-        this->m_order = &m_reverseOrder; // shared_ptr
+        this->m_order = &m_reverseRank; // shared_ptr
         this->m_vertices = &m_reversedVertices; // shared_ptr
         this->iterationStep();
 
         m_reverseDirection = false;
-        this->m_order = &m_classicalOrder; // shared_ptr
-        this->m_vertices = &m_classicalVertices; // shared_ptr
+        this->m_order = &m_rank; // shared_ptr
+        this->m_vertices = &m_orderedVertices; // shared_ptr
     }
 
     void splitEdges()
     {
-        m_classicalVertices = BellmanFord<T>::getVertices();
+        m_orderedVertices = BellmanFord<T>::getVertices();
 
         std::random_device rd;
         std::mt19937 g(rd());
-        std::ranges::shuffle(m_classicalVertices, g);
+        std::ranges::shuffle(m_orderedVertices, g);
 
-        m_reversedVertices = m_classicalVertices;
+        m_reversedVertices = m_orderedVertices;
         std::ranges::reverse(m_reversedVertices);
 
-        for (size_t i {}; i < m_classicalVertices.size(); ++i)
+        for (size_t i {}; i < m_orderedVertices.size(); ++i)
         {
-            m_classicalOrder[m_classicalVertices[i]] = static_cast<int>(i);
-            m_reverseOrder[m_classicalVertices[i]] = static_cast<int>(m_classicalVertices.size() - i);
+            m_rank[m_orderedVertices[i]] = static_cast<int>(i);
+            m_reverseRank[m_orderedVertices[i]] = static_cast<int>(m_orderedVertices.size() - i);
         }
 
-        for (const auto& node : m_classicalVertices)
+        for (const auto& node : m_orderedVertices)
         {
             for (const auto& edge : BellmanFord<T>::getNodeEdges(node))
             {
-                if (m_classicalOrder[edge.from] < m_classicalOrder[edge.to])
+                if (m_rank[edge.from] < m_rank[edge.to])
                 {
                     m_edgesInOrder[node].push_back(edge);
                 }
@@ -78,8 +78,8 @@ private:
             }
         }
 
-        this->m_vertices = &m_classicalVertices; // shared_ptr
-        this->m_order = &m_classicalOrder; // shared_ptr
+        this->m_vertices = &m_orderedVertices; // shared_ptr
+        this->m_order = &m_rank; // shared_ptr
     }
 
     virtual const std::vector<Edge<T>>& getNodeEdges(const int node) const
@@ -97,10 +97,10 @@ private:
         }
     }
 
-    std::unordered_map<int, int>                    m_classicalOrder;
-    std::unordered_map<int, int>                    m_reverseOrder;
+    std::unordered_map<int, int>                    m_rank;
+    std::unordered_map<int, int>                    m_reverseRank;
 
-    std::vector<int>                                m_classicalVertices;
+    std::vector<int>                                m_orderedVertices;
     std::vector<int>                                m_reversedVertices;
 
 
