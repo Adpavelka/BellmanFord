@@ -2,8 +2,10 @@
 
 #include "Edge.h"
 
+#include <algorithm>
+#include <random>
+#include <ranges>
 #include <unordered_map>
-#include <unordered_set>
 #include <vector>
 
 template <Weight T>
@@ -13,12 +15,9 @@ public:
     explicit Graph(std::vector<Edge<T>> edges)
     : m_edges(std::move(edges))
     {
-        std::unordered_set<int> vertices;
         for (const auto& edge : m_edges)
         {
             m_adjacent[edge.from].push_back(edge);
-            // vertices.insert(edge.from);
-            // vertices.insert(edge.to);
 
             if (auto [_, inserted] = vertices.insert(edge.from); inserted) // keep order 
             {
@@ -30,7 +29,11 @@ public:
             }
         }
 
-        // m_vertices = std::vector<int> (vertices.begin(), vertices.end()); // random shuffle
+        std::random_device rd;
+        std::mt19937 g(rd());
+        std::ranges::shuffle(m_vertices, g);
+
+        m_vertices = std::vector<int> (vertices.begin(), vertices.end()); // random shuffle
     }
 
     const std::vector<Edge<T>>& getNodeEdges(const int node) const
