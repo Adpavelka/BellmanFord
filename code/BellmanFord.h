@@ -115,25 +115,16 @@ protected:
         {
             for (const auto& edge : getNodeEdges(node))
             {
-                if (canRelax(edge))
-                {
-                    doRelaxActions(edge);
-                }
+                relaxIfPossible(edge);
             }
         }
     }
 
-    bool canRelax(const Edge<T>& edge) const
+    void relaxIfPossible(const Edge<T>& edge)
     {
-        return  m_distances.contains(edge.from) &&
-                (!m_distances.contains(edge.to) || m_distances.at(edge.from) + edge.weight < m_distances.at(edge.to));
-    }
-
-    void doRelaxActions(const Edge<T>& edge)
-    {
-        for (const auto& relaxAction : m_relaxActions)
+        if (canRelax(edge))
         {
-            relaxAction(edge);
+            doRelaxActions(edge);
         }
     }
 
@@ -175,6 +166,20 @@ private:
         for (const auto& heuristic : m_heuristics)
         {
             heuristic(source);
+        }
+    }
+
+    bool canRelax(const Edge<T>& edge) const
+    {
+        return  m_distances.contains(edge.from) &&
+                (!m_distances.contains(edge.to) || m_distances.at(edge.from) + edge.weight < m_distances.at(edge.to));
+    }
+
+    void doRelaxActions(const Edge<T>& edge)
+    {
+        for (const auto& relaxAction : m_relaxActions)
+        {
+            relaxAction(edge);
         }
     }
 
