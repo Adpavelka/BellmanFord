@@ -10,5 +10,7 @@ public:
     virtual void printIntoFile(const std::string& filename) const = 0;
     virtual std::string getName() const = 0;
 
+    virtual bool hasNegativeCycle() const = 0;
+
     virtual ~ISingleSourceShortestPath() = default;
 };
