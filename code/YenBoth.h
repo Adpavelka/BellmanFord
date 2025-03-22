@@ -18,4 +18,6 @@ public:
     {
         return "YenBoth";
     }
+
+    ~YenBoth() override = default;
 };
