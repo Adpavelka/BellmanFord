@@ -34,8 +34,6 @@ public:
         std::random_device rd;
         std::mt19937 g(rd());
         std::ranges::shuffle(m_vertices, g);
-
-        m_vertices = std::vector<int> (vertices.begin(), vertices.end()); // random shuffle
     }
 
     const std::vector<Edge<T>>& getNodeEdges(const int node) const
