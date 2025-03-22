@@ -6,6 +6,7 @@
 #include <random>
 #include <ranges>
 #include <unordered_map>
+#include <unordered_set>
 #include <vector>
 
 template <Weight T>
@@ -15,6 +16,7 @@ public:
     explicit Graph(std::vector<Edge<T>> edges)
     : m_edges(std::move(edges))
     {
+        std::unordered_set<int> vertices;
         for (const auto& edge : m_edges)
         {
             m_adjacent[edge.from].push_back(edge);
