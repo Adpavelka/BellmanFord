@@ -33,10 +33,7 @@ private:
 
             for (const auto &edge : this->getNodeEdges(node))
             {
-                if (this->canRelax(edge)) // relax if possible..
-                {
-                    this->doRelaxActions(edge);
-                }
+                this->relaxIfPossible(edge);
 
                 if (this->m_negativeCycleDetected)
                 {
