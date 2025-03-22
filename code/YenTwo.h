@@ -30,20 +30,20 @@ private:
     void initialize(const int)
     {
         m_reverseDirection = false;
-        this->m_order = &m_rank; // shared_ptr
-        this->m_vertices = &m_orderedVertices; // shared_ptr
+        this->m_order = &m_rank;
+        this->m_vertices = &m_orderedVertices;
     }
 
     void reversedOrderIteration()
     {
         m_reverseDirection = true;
-        this->m_order = &m_reverseRank; // shared_ptr
-        this->m_vertices = &m_reversedVertices; // shared_ptr
+        this->m_order = &m_reverseRank;
+        this->m_vertices = &m_reversedVertices;
         this->iterationStep();
 
         m_reverseDirection = false;
         this->m_order = &m_rank; // shared_ptr
-        this->m_vertices = &m_orderedVertices; // shared_ptr
+        this->m_vertices = &m_orderedVertices;
     }
 
     void splitEdges()
@@ -52,7 +52,7 @@ private:
 
         std::random_device rd;
         std::mt19937 g(rd());
-        std::ranges::shuffle(m_orderedVertices, g);
+        std::ranges::shuffle(m_orderedVertices, g); // zkusit bez shufflu ?
 
         m_reversedVertices = m_orderedVertices;
         std::ranges::reverse(m_reversedVertices);
@@ -78,8 +78,8 @@ private:
             }
         }
 
-        this->m_vertices = &m_orderedVertices; // shared_ptr
-        this->m_order = &m_rank; // shared_ptr
+        this->m_vertices = &m_orderedVertices;
+        this->m_order = &m_rank;
     }
 
     virtual const std::vector<Edge<T>>& getNodeEdges(const int node) const
