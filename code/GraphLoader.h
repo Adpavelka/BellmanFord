@@ -24,11 +24,8 @@ std::vector<Edge<T>> loadEdgesFromFile(const std::string& filename)
     while (std::getline(file, line))
     {
         std::istringstream stream(line);
-        std::string ignore; // each line starts with letter a for some reason
         int from, to;
         T weight;
-
-        stream >> ignore;
         
         stream >> from >> to >> weight;
 
