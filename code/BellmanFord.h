@@ -22,7 +22,7 @@ public:
         this->m_iterationSteps.push_back([this]() { this->prepareForNextIteration(); });
         this->m_iterationSteps.push_back([this]() { this->iterationStep(); });
 
-        m_vertices = &m_graph->getVertices(); // shared_ptr
+        m_vertices = &m_graph->getVertices();
     }
 
     void run(const int source) final
@@ -101,6 +101,11 @@ public:
         return "BellmanFord";
     }
 
+    bool hasNegativeCycle() const override
+    {
+        return m_negativeCycleDetected;
+    }
+
     ~BellmanFord() override = default;
 
 protected:
@@ -142,8 +147,8 @@ protected:
         return m_graph->getNodeEdges(node);
     }
 
-    const std::vector<int>*                             m_vertices {}; // shared_ptr
-    std::unordered_map<int, int>*                       m_order {}; // shared_ptr
+    const std::vector<int>*                             m_vertices {};
+    std::unordered_map<int, int>*                       m_order {};
 
     bool                                                m_negativeCycleDetected;     
     std::vector<std::function<void()>>                  m_iterationSteps;
@@ -193,11 +198,11 @@ private:
         }
     }
 
-    void checkNegativeCycle() const
+    void checkNegativeCycle() // const
     {
         if (m_negativeCycleDetected)
         {
-            std::cout << "Negative cycle detected." << std::endl;
+            // std::cout << "Negative cycle detected." << std::endl;
             return;
         }
         
@@ -205,7 +210,8 @@ private:
         {
             if (canRelax(edge))
             {
-                std::cout << "Negative cycle detected." << std::endl;
+                // std::cout << "Negative cycle detected." << std::endl;
+                m_negativeCycleDetected = true;
                 return;
             }
         }
