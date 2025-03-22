@@ -19,4 +19,6 @@ public:
     {
         return "TarjanYenTwo";
     }
+
+    ~TarjanYenTwo() override = default;
 };
