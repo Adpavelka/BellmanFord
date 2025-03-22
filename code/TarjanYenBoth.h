@@ -20,4 +20,6 @@ public:
     {
         return "TarjanYenBoth";
     }
+
+    ~TarjanYenBoth() override = default;
 };
