@@ -64,6 +64,11 @@ public:
         }
     }
 
+    bool hasNegativeCycle() const override
+    {
+        return false;
+    }
+
     ~Dijkstra() override = default;
 
 protected:
