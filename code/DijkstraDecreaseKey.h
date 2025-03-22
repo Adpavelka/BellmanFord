@@ -24,7 +24,7 @@ public:
         while (ssize(visited) < this->m_graph->size())
         {
             int node = selectMinDistanceNode(visited);
-            if (node == -1)
+            if (node == -1 || visited.contains(node))
             {
                 break;
             }
