@@ -24,7 +24,7 @@ public:
         
         while (!pq.empty())
         {
-            const auto& [distance, node] = pq.top();
+            const auto [distance, node] = pq.top();
             pq.pop();
 
             if (distance > this->m_distances[node])
@@ -38,7 +38,7 @@ public:
                 {
                     this->m_distances[to] = this->m_distances[node] + weight;
                     this->m_parents[to] = node;
-                    pq.emplace(this->m_distances[to], to);
+                    pq.push({this->m_distances[to], to});
                 }
             }
         }
