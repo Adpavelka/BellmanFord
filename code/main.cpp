@@ -101,7 +101,7 @@ void runAlgorithm(std::unique_ptr<ISingleSourceShortestPath>& algo, const int so
     }
     std::ofstream outFile("../times/" + algo->getName() + ".txt", std::ios::app);
     if (outFile) {
-        outFile  << duration.count() << "\t\t\t" << algo->getNodeVisitedCount() << std::endl;
+        outFile  << duration.count() << std::endl;
     }
     outFile.close();
 }
