@@ -82,7 +82,7 @@ private:
         this->m_order = &m_rank;
     }
 
-    virtual const std::vector<Edge<T>>& getNodeEdges(const int node) const
+    const std::vector<Edge<T>>& getNodeEdges(const int node) const override
     {
 
         if (m_reverseDirection)
