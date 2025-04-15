@@ -203,23 +203,15 @@ private:
         }
     }
 
-    void checkNegativeCycle() // const
+    void checkNegativeCycle() //const
     {
         if (m_negativeCycleDetected)
         {
-            // std::cout << "Negative cycle detected." << std::endl;
+            //std::cout << "Negative cycle detected." << std::endl;
             return;
         }
         
-        for (const auto& edge : m_graph->getEdges())
-        {
-            if (canRelax(edge))
-            {
-                // std::cout << "Negative cycle detected." << std::endl;
-                m_negativeCycleDetected = true;
-                return;
-            }
-        }
+        m_negativeCycleDetected = std::ranges::any_of(m_graph->getEdges(), [this] (const auto& edge) { return canRelax(edge); });
     }
 
     bool                            m_edgeRelaxed;
