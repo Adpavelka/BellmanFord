@@ -131,7 +131,7 @@ void testAll(const int source, const std::vector<Edge<T>>& edges)
         runAlgorithm(algo, source, negativeCycles);
     }
 
-    if (!std::all_of(negativeCycles.begin(), negativeCycles.end(), [&](auto val) { return val == negativeCycles.front(); }))
+    if (!std::ranges::all_of(negativeCycles, [&negativeCycles] (auto val) { return val == negativeCycles.front(); }))
     {
         throw std::runtime_error("Negative cycles detected incorrectly");
     }
