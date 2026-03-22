@@ -4,7 +4,7 @@ This project implements and compares multiple algorithms for solving the **Singl
 
 The focus is on practical performance and extensibility, including several heuristic improvements of the Bellman-Ford algorithm.
 
-## 🚀 Features
+## Features
 
 - Implementation of classical shortest path algorithms:
   - Dijkstra (priority queue variant)
@@ -23,7 +23,7 @@ The focus is on practical performance and extensibility, including several heuri
 - Path reconstruction support
 - Detection of negative-weight cycles
 
-## 🧠 Key Ideas
+## Key Ideas
 
 The project is built around a **modular Bellman-Ford framework**, where heuristics are implemented as composable components.
 
@@ -35,7 +35,7 @@ The project is built around a **modular Bellman-Ford framework**, where heuristi
 
 This allows flexible experimentation without duplicating code.
 
-## 🏗️ Architecture
+## Architecture
 
 - `Graph`
   - Adjacency list representation using `std::unordered_map`
@@ -53,9 +53,10 @@ This allows flexible experimentation without duplicating code.
 - Combined variants:
   - `YenBoth`
   - `TarjanYenOne`
+  - `TarjanYenTwo`
   - `TarjanYenBoth`
 
-## 📊 Experiments
+## Experiments
 
 The algorithms were evaluated on multiple graph types:
 
@@ -71,7 +72,7 @@ The algorithms were evaluated on multiple graph types:
 - Combining heuristics is not always beneficial
 - Graph structure has major impact on performance
 
-## ⚙️ Usage
+## Usage
 
 ### Run algorithm
 ```cpp
@@ -88,29 +89,29 @@ algorithm.printPath(target);
 algorithm.exportDistances("output.txt");
 ```
 
-## 🧪 Testing
+## Testing
 
 - All algorithms share a common interface
 - Outputs are compared automatically
 - Ensures correctness across implementations
 - Negative cycle detection is validated across all variants
 
-## 📈 Performance Measurement
+## Performance Measurement
 
 - Execution time measured using `<chrono>`
 - Results stored in output files for further analysis
 
-## 🛠️ Technologies
+## Technologies
 
-- C++20
+- C++23
 - STL (containers, algorithms, smart pointers)
-- Templates, concepts, and lambda functions
+- Templates, constraints and concepts, and lambda functions
 
-## 📌 Motivation
+## Motivation
 
 The goal of this project is to explore the **practical performance of shortest path algorithms** and demonstrate how heuristic optimizations can significantly improve real-world efficiency without changing theoretical complexity.
 
-## 👨‍💻 Author
+## Author
 
 Adam Pavelka  
 Bachelor’s Thesis – Faculty of Informatics, Masaryk University
