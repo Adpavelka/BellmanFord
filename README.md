@@ -1,3 +1,0 @@
-# BellmanFord
-
-TODO
